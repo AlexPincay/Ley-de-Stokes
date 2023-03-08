@@ -1,0 +1,27 @@
+#Grados API=30°
+#Viscocidad del petróleo= 0.002 (lb/ft-s)
+bfpd=int(input('Ingrese los barriles de fluido: '))
+bsw=float(input('Ingrese el BSW (%): '))
+emul=float(input('Ingrese la emulsión (%): '))
+va=float(input('Ingrese la velocidad de acentamiento de la partícula (pulg/min): '))#Velocidad de asentamiento de las gotas de agua
+#Barriles de agua
+bwpd=bfpd*(bsw/100)
+#Barriles de petróleo
+bopd=bfpd-bwpd
+#Agua emulsionada
+h2oe=bopd*emul/(100-emul)
+#Agua libre
+h2ofr=bwpd-h2oe
+#Emulsión
+emuls=bopd+h2oe
+#Densidad relativa del petróleo
+dro=141.5/(30+131.5)
+#Densidad del petróleo
+po=dro*62.4    # 62.4 densidad del agua en lb/ft^3
+#Diametro de la gota de agua
+dgh2o=((va*0.002)/((62.4-po)*2.061131*10**5))**0.5
+print(f'Agua emulsionada= {h2oe:0.4f}')
+print(f'Emulsión= {emuls:0.4f}')
+print(f'Agua libre= {h2ofr:0.4f}')
+print(f'Densidad del petróleo= {po:0.4f}')
+print(f'El diámetro de la gota de agua es de: {dgh2o:0.4f} (um)')
